@@ -144,8 +144,16 @@ NB: - Toutes les options de recherche de la commande 'F(FIND)' sont aussi valabl
 - SETUNDO ON: 	Permet aussi d'activer le fonctionnement de la commande UNDO.			
 - UNDO: Equivalent de Ctrl+Z sur word c-à-d annuler la dernière modification.
 - PROFILE: Permet de voir ttes les options possibles qu'on peut activer en mode édition du contenu d'un DS.
+- TABS STD: Activer le hardware tabbing; characters in attribute byte locations are not overwritten.
+- TABS ALL: Activer le hardware tabbing; attribute byte overwrite characters.
+- TABS OFF: Désactiver le hardware tabbing.
+- TABS \: Activer le logical tabbing. 
+- \\text\merci: forme de logical tabbing. \ = une tabulation, donc "text" sera décalé en colone 2 et "merci" en colonne 3.
+	\text\\merci: "text" sera décalé en colonne 1 et "merci" en colonne 3.
 
-
+NB: - Concernant les tabbing, les hyphens(-) st ignorés dans le hardware et le logical tabbing. 
+	- Concernant les tabbing, les asterisks(*) st ignorés dans le software tabbing.
+	- Les hyphens(-) ou les underscore(_) sont use ds la software tabbing pour représenter les champs (colonne)   
 
 
 *********************************************************************************************************************************
