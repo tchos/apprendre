@@ -1,0 +1,191 @@
+- Pour revenir : f3
+- touche ctrl: entrer
+- touche entrer: manipuler le curseur
+- ***: ici il faut seulement traper ctrl sinon il va ignorer
+- https://myinterskill.co.uk/ = plateforme de test
+- F13 = shift + F1 donc F24 = shift + F12
+
+
+********************************************************************************************************************************
+**********************************************  COMMANDES TSO (Time Sharing Option)  *******************************************
+********************************************************************************************************************************
+- LOGOFF: se déconnecter de TSO.
+- LOGON: se conncter, LOGON implique le LOGOFF donc en faisant LOGON ca fait d'abord LOGOFF avant de vous connecter à nouveau.
+NB: The LISTCAT/LISTC command is used to list data sets, interrogate catalogs, and enable the user to list one or many data sets with a particular name or prefix.
+- LISTCAT ENTRIES('TRAIN20.ALLOC.BY.JCL') ALL: Lister tous les catalogues d'un dataset.
+- LISTCAT LEVEL/LVL(TS89809): Lister tous les DS dont le HQL est TS89809, TS89809 étant le user ID.
+NB: LISTDS command can be used to list data set information
+- LISTDS ('TS89809.PROGS.COBOL') STATUS: Lister les DDnames associés au DS.
+- RENAME 'OLD NAME' 'NEW NAME': Renommer un DS ou un mbre d'1 PDS.
+- TSO PROFILE NO PREFIX: va désactiver le préfix (ex: TRAIN52) sur le nom de chaque DATASET Name
+- TSO PROFILE PREFIXE(CMR): Cration du préfixe CMR pour l'ajouter au nom de chaque new dataset.
+- # PROFILE: Affiche certains infos sur mon profile connecté actuellement
+- =6; # PROFILE: Avoir accès à mon profile peu importe où je me trouve.
+- ALLOC FILE/DDNAME(ddname) DA('DATASET NAME') SHR : Alloction d'1 DS avec le DDNAME que nous-mêmes avons choisi.
+- ALLOCATE DA('IBMUSER.HELP','SYS1.HELP') FIND(SYSHELP) : Allouer les DS d'aide du système et du user connecté au DS SYSHELP.
+- LISTALC: Afficher 
+- ISRFIND: Version formatée de LISTALC STATUS SYSNAMES
+- ISRFIND DD(DDNAME): Affiche les informations sur un DDNAME spécifique. 
+- ISRFIND DD(DDNAME) PARAMETRES: Affiche les informations sur un DDNAME spécifique avec un attribut spécifique (Ex: ISRFIND DD(SYSEXEC) INFOS ). 
+- ISRFIND DD(SYSEXEC) INFOS SAVE: Sauvegarde les infos sur le DDNAME 'SYSEXEC' dans 1 DS qui sera nommé USERID.ISRFIND.SAVE 
+- ISRFIND DD(SYSEXEC) INFOS APPEND: Sauvegarde les infos sur le DDNAME 'SYSEXEC' dans le DS USERID.ISRFIND.SAVE en ajoutant les infos. 
+- ISRFIND DD(SYSEXEC) M(Membre): Affiche les infos sur un membre du PDS 'SYSEXEC'.
+- LISTDSI: Affiche la liste des attributs (paramètres) losqu'on veut voir les infos sur 1 DS.
+- ISRDDN: Affiche plus de détails sur les DS.
+- SYS1.CMDLIB: Fichier dans lequel est référencé toutes les cmdes TSO. Si une cmde TSO ne s'exécute pas c'est qu'elle ne s'y trouve pas.
+
+*********************************************************************************************************************************
+**********************     COMMANDES ISPF (Interactive Search and Display Facility)     *****************************************
+*********************************************************************************************************************************
+
+- PFSHOW: permet de voir tous les roles des touches F du clavier (F1...F12) encore app
+- KEYS: montre les configs actuelles de PFSHOW
+- ISPFORM: ramène vers le menu principal de ISPF 
+- DDLIST: Liste tous les DDNAME (Data Definition Name. DD c'est le mécanisme de création de lien entre un process et Data set sur le disque)
+- E devant 1 PDS: Entrer dans le PDS
+	- I: insérer une ligne (i9 insere 9 lignes)
+	- D: supprimer une ligne (d11 supprime 11 lignes)
+	- DD: Supprimer un bloc
+	- R: dupliquer une ligne
+ 	- RR: dupliquer un bloc
+	- C: copier une ligne
+	- CC: copier un bloc
+	- X sur une ligne: masquer la ligne
+	- XX sur deux lignes: masquer le bloc de lignes marquées par XX. 
+	- A: After une ligne  (Ex: coller une ligne après la ligne où se trouve le curseur)
+	- B: Before une ligne (Ex: coller une ligne avant la ligne où se trouve le curseur)
+	- SAVE: Enregistre les modifications
+	- CAN(CANCEL): Sortir sans enrgistrer les modifications.
+	- numéro de ligne + F8: aller à la ligne
+	- m F8: Vas jusqu'à la dernière ligne du code
+	- m F7: Vas à la toute 1ère ligne du code
+	- F DUMP (trouve la chaine DUMP)
+	- F DUMP ALL (trouve toutes les occurrences de la chaine DUMP)
+	- C DUMP LOLO: (change une occurrence de DUMP en LOLO)
+	- C DUMP LOLO ALL: (change toutes les occurrences de DUMP en LOLO)
+	- C DUMP LOLO + F5 (parcoure chaque et occurence de DUMP et en appuyant sur F6 pour changer
+
+- S MEMBRE: Ajouter un mbre dans un PDS (Pour écrire des JCL).
+- S MBRE2;COPY MBRE1: Création du mbre MBRE2 en dupliquant le mbre MBRE1 ou faire S MBRE2, entrer dans le JCL et faire COPY MBRE1.
+- F MEMBRE: Trouve un mbre.
+- L mbre*: liste tous les objets commencant par mbre.
+- START: Crée un nouvel écran ISPF (Screen 2,..,32 --- On peut aller jusqu'à 32 écrans) 
+- SWAP: basculer entre les écrans créés ou F9.
+- SWAP LIST: Montre un panneau où l'on peut tous les écrans.
+- SWAPBAR: AFFICHE LA BAR D'état.
+- CUT: COUPER
+- COPY: Copier.
+- PASTE: Coller.
+- REF: RAFRAICHIR l'écran.
+- RES: Reset.
+- SPLIT NEW: Crée une nouvelle session ISPF.
+- SWAP SCREENNAME: Pour se déplacer vers les écrans listés avec la commande "SWAP LIST". Ex: SWAP EDIT.
+- SWAPBAR or SWAPBAR ON command will display a list of sessions at the bottom of your screen.
+- SWAPBAR or SWAPBAR OFF: Effet inverse de "SWAPBAR or SWAPBAR ON".
+- =X: Fermer rapidement l'écran actif ou la session logique active de ISPF.
+- =XALL: Fermer rapidement tous les écrans ou sessions logiques de ISPF.
+- CHG(CHANGE) O '0' ALL 40 70: Changer ttes les occurrences de O en 0 se trouvant dans les colonnes 40 et 70.
+- CHANGE E Z .A .B ALL: Changer tous les 'E' en 'Z' se trouvant entre la ligne labelisée '.A' et la ligne labelisée '.B'.
+- CHANGE E Z .A .ZLAST ALL: Changer tous les 'E' en 'Z' se trouvant entre la ligne labelisée '.A' et la dernière ligne.
+- CHANGE E Z .ZFIRST .FIN ALL: Changer tous les 'E' en 'Z' se trouvant entre la 1ère ligne et la ligne labelisée '.FIN'.
+- FIND 'WORD' WORD: Trouver toutes les occurrences du mot 'WORD' en entier.
+- FIND 'WORD' PREFIX: Trouver tous les mots Commencant par 'WORD'.
+- FIND 'WORD' SUFFIX: Trouver tous les mots Finissant par 'WORD'.
+- FIND 'Te'C : "C" avant ou après "Te" signifie "case sensitive" donc on doit exactement trouver "Te".
+- FIND WORD: Trouver tous les mots contenant une occurrence du mot 'WORD'.
+- F(FIND) p'# to #': Trouver toutes les chaines 'to' entourés de chiffres compris entre 0 et 9. Ex: 1 to 5.	
+- FIND X'7D': Recherche hexadécimale.
+- FIND P'#' : Recherche tout caractère numérique. 
+- FIND P'# to #' : Recherche toutes les chaines ' to ' se trouvant en 2 caractères numériques.   
+- FIND P'AB=de' : = représente n'importe quel caractère. Ex de résultats: ABCDE, AB DE, ab3de, Ab/De.
+- FIND P'-#' : = représente n'importe quel caractère non numerique suivi d'un caractère numérique. Ex de résultats: -6, $9, A2.
+- FIND '5#'P: Recherche ttes les chaines contenant 5 suivies d'un nombre.
+- FIND p't<e' : Recherche n'importe quelle chaine de caractère en miniscule entre 't' et 'e'. Ex: the, Tie, TuE. 
+- FIND p't>e': Recherche n'importe quelle chaine de caractère en majuscule entre 't' et 'e'. Ex: tHe, TIe, TUE. 
+- FIND '$' : Recherche n'importe quel caractère spécial. 
+- FIND '@' : Recherche n'importe quelle lettre. 
+- FIND R'T.Y' ALL: R pour les expressions régilières. Le '.' représente un seul caractère. Ex: TIY, TeY
+- FIND R'T*Y' ALL : R pour les expressions régilières. Le '*' représente 0 ou plusieurs caractères 'T'. Ex: TY, TTY, TTTTY.
+- FIND R'T?Y' ALL : R pour les expressions régilières. Le '?' représente 0 ou un seul caractère 'T'. Ex: TY, TTY.
+- FIND R'T+Y' ALL : R pour les expressions régilières. Le '?' représente 1 ou plusieurs caractères 'T'. Ex: TTY, TTTY.
+- FIND 'tuer' .ZCSR .ZFIRST(.ZF) recherche 'tuer' à partir de la ligne où se trouve le curseur jusqu'à la première ligne.
+- FIND 'tuer' .ZCSR .ZLAST(.ZL): recherche 'tuer' à partir de la ligne où se trouve le curseur jusqu'à la dernière ligne.
+- LOCATE 001200: Va directement à ligne 001200 de l'éditeur de texte.
+- LOCATE .A: Va directement à ligne marquée ou labelisée A dans l'éditeur de texte.
+- CHANGE p'@' p'<' all 43: mettre n'impote quel lettre sur la colonne 43 en minuscule.
+- CHANGE 'word' 'text': Changer toutes les mots word en mots text.
+- CHANGE Loop Program X : Changer toutes les mots Loop en mots Program seulement dans les lignes exclues.
+- CHANGE Loop Program NX : Changer toutes les mots Loop en mots Program seulement dans les lignes non-exclues c-à-d visibles.
+
+NB: - Toutes les options de recherche de la commande 'F(FIND)' sont aussi valables pour la cmde 'CHANGE' (C,CHA,CHG).
+	- Autres options de recherche avec les expressions régulières: A|B (A ou B), \ (pour recherche un caractère spécial),
+		[AEB](Un caractère entre A, E, B), [01-99](un caractère compris entre 01 et 99, 
+		[^EO](tout sauf E et O), 
+		FIND R'M[UNL]{2}CH': Recherche tous les mots commencant par M et finissant par CH pouvant contenir 2 des caractères
+			se trouvant dans [UNL]. Ex: MUNCH, MULCH, MNLCH.  
+	 
+
+- X ALL; F LOOP ALL: Masquer d'abord toutes les lignes puis afficher seulement les lignes contenant le mot 'LOOP'.
+- RESET: Réafficher toutes les lignes masquées.
+- RESET EXCLUDED: Réafficher toutes les lignes masquées sauf celles qui ont été marquées.
+- FLIP primary command can be used to reverse the exclude status of the data lines. (Les lignes exclues seront affichées et celles
+		qui étaient visibles seront masquées.
+- CREATE COPYDS: Crée 1 DS nommé COPYDS qui va contenir les lignes copiées ou déplacées du DS dans lequel on se trouvait avant 						d'exécuter CREATE COPYDS.
+- REPLACE REPDS: Les lignes copiées dans le DS en édition seront copiées pour aller écraser le contenu du DS nommé REPDS.
+- CANCEL (or CAN): Sortir de l'édition d'un DS sans enregistrer les modifications effectuées depuis le dernier save.
+- SAREA: Affiche le statut de ISPF.
+- SYSNAME ON: Affiche le nom du système sur lequel nous sommes connectés.
+- USERID ON: Affiche l'ID du user connecté
+- SCRNAME ON: Affiche le nom de l'écran courant.
+- MSGID ON:	
+- ZEXPAND: Permet de saisir les commandes sur plusieurs lignes car par défaut il n'y a qu'une seule ligne pour les cmdes.
+- RECOVERY ON: Active la sauvegarde automatique du DS pendant en mode édition.
+				Permet aussi d'activer le fonctionnement de la commande UNDO.
+- SETUNDO ON: 	Permet aussi d'activer le fonctionnement de la commande UNDO.			
+- UNDO: Equivalent de Ctrl+Z sur word c-à-d annuler la dernière modification.
+- PROFILE: Permet de voir ttes les options possibles qu'on peut activer en mode édition du contenu d'un DS.
+
+
+
+
+*********************************************************************************************************************************
+************************************  COMMANDE SDSF (System Display Search Facility)  *******************************************
+*********************************************************************************************************************************
+
+- SET DISPLAY ON: Affiche la ligne qui begin avec 'PREFIX=..*' car elle n'est pas activée par défaut donc il faut tjr l'activer car ca me donne mon état SDSF.
+- PREFIX ** : M'affiche tous les espaces adresses. PREFIX (PRE) par défaut m'affiche tous les espaces adresses commencant par mon nom de USER.
+- PREFIX TRAIN52*: Affiche la liste des JOB commencant par TRAIN52.
+- H ou O: Liste les JOB dont l'exécution est terminée (S puis CTRL permet de sélectionner un job pour avoir + de détails sur l'exécution du job).
+- DA: Liste les job en cours d'exécution.
+- OWNER * : Permet de voir tous les USERs propriétaires d'un espace adresse.*
+- DA (Display Active): Voir tous les process (espaces adresses) qui tournent actuellement sur le système (équivalant du gestionnaire de taches sur windows).
+- /C U=userID: permet de tuer la session du user 'USERID' si l'on a les droits.*
+- S JOB: Voir les détails d l'exécution d'un job
+- ? JOB: Voir les détails de l'output d'exécution d'un job avec des sous-parties.
+- SORT CRITERE A: Tri ascendant selon le critère (Ex: SORT JobID).
+- SORT CRITERE D: Tri ascendant selon le critère (Ex: SORT CRDATE D: Tri par date de création)
+- SORT ?: Tri selon plusieurs critères
+- ARR(ANGE) ?: Réarrange les colonnes. On sélectionne avec "/" et on cherche où le mettre avec "A" ou "B".
+- XDC JOB: Permet de sauvegarder l'ouput du dump d'un JOB dans DS séquentiel.
+- /D GRS,C : Global Resource Serialisation ca permet d'interroger le mécanisme JES2 pour voir s'il y a un contentieux sur 1 DS.
+- INIT: Initators, espace adresse prêts à accepter les JOB (1 initiator A n'acceptera que les JOB de classe A, 1 initiator ABC accèptera les JOB de 
+			classe A, de classe B, de classe C. Si on déclare un JOB avec une classe qui ne se trouve pas dans les initiator, ce JOB ne s'exécutera jamais
+			jusqu'à ce qu'on change le classe par une classe dont l'initiator existe)
+
+
+*********************************************************************************************************************************
+*****************************************************  COMMANDES SYSTEME  *******************************************************
+*********************************************************************************************************************************
+
+- Quand une cmd est précédée de / ca veut dire que c'est une commande système.
+- /D : DISPLAY
+- /F CATALOG,OPEN
+- /D NET, MAJNODES: Voir les noeuds (sites) ouverts dans le système.
+
+NB: 
+	- Un JOB est 1 espace adresse mais un espace adresse n'est pas forcement un JOB car il y a plusieurs types d'espace adresse.
+
+
+
+
+
