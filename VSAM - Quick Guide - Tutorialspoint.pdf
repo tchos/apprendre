@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>VSAM - Quick Guide - Tutorialspoint</title>
+<meta charset="utf-8">
+<meta name="description" content="VSAM - Quick Guide - Virtual Storage Access Method (VSAM) is high performance access method and data set organization, which organizes and maintains data via a catalog structure. It"/>
+<meta name="keywords" content="C, C++, Python, Java, HTML, CSS, JavaScript, SQL, PHP, jQuery, XML, DOM, Bootstrap, Tutorials, Articles, Programming, training, learning, quiz, preferences, examples, code"/>
+<link rel="canonical" href="https://www.tutorialspoint.com/vsam/vsam_quick_guide.htm" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<link rel="stylesheet" href="/themes/css/style-min-v1.css?v=3.1.2.336">
+<script src="/themes/js/script-min-v1.js?v=3.0.2040229"></script>
+<script>
+function printPage() { window.print(); }
+function readCookie(name) {
+     var nameEQ = name + "=";
+     var ca = document.cookie.split(';');
+     for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+     }
+     return null;
+}
+</script>
+<script id="adp1" data-cfasync="false" type="text/javascript">(function(w, d) { var s = d.createElement('script'); s.src = '//cdn.adpushup.com/40046/adpushup.js'; s.type = 'text/javascript'; s.async = true; (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(s); })(window, document);</script>
+<script id="adp2" data-cfasync="false" type="text/javascript">(function(w, d) {var cval = readCookie('subscription_purchased');if(cval == '1'){ return; } var s = d.createElement('script'); s.src = '//delivery.adrecover.com/18107/adRecover.js'; s.type = 'text/javascript'; s.async = true; (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(s); })(window, document);</script>
+<style>
+.butnn-save a{color:#fff;} .notes_msg{color:green; margin-left:20px; margin-top:15px;}
+.right-menu .mui-btn {
+    background-color:#1ca7a0;
+}
+a.demo {
+    background:#1ca7a0;
+}
+li.heading {
+    background:#1ca7a0;
+}
+.course-box{background:#1ca7a0}
+.home-intro-sub p{color:#1ca7a0}
+a.demo{
+   top: 12px;
+   float:right;
+}
+.prettyprint{
+   width: 99%;
+}
+</style>
+</head>
+<body>
+<header id="header">
+<!-- pop-up -->
+<div class="pop-modal overlay-pop popdiv">
+<div class="modal-window small">
+<span class="close" title="close">×</span>
+<div class="pop-content">
+</div>
+<span class="msg" ></span>
+</div>
+</div>
+<div class="wrap_loader">
+<div class="imgLoader"><img src="/videotutorials/images/loader.gif" alt="Tutorialspoint" width="70" height="70"></div>
+</div>
+<input type="hidden" id="vu" name="vu" value="" />
+<!-- pop-up -->
+
+<!-- Top sub-menu Starts Here -->
+<div class="mui-appbar mui-container-fulid top-menu">
+<div class="mui-container">
+<div class="top-menu-item home">
+<a href="https://www.tutorialspoint.com/index.htm" target="_blank" title="TutorialsPoint - Home"><i class="fal fa-home"></i> <span>Home</span></a>
+</div>
+<div class="top-menu-item qa">
+<a href="https://www.tutorialspoint.com/about/about_careers.htm" target="_blank" title="Job @ Tutorials Point"><i class="fa fa-suitcase"></i> <span>Jobs</span></a>
+</div>
+<div class="top-menu-item tools">
+<a href="https://www.tutorialspoint.com/online_dev_tools.htm" target="_blank" title="Tools - Online Development and Testing Tools"><i class="fal fa-cogs"></i> <span>Tools</span></a>
+</div>
+<div class="top-menu-item coding-ground">
+<a href="https://www.tutorialspoint.com/codingground.htm" target="_blank" title="Coding Ground - Free Online IDE and Terminal"><i class="fal fa-code"></i> <span>Coding Ground </span></a> 
+</div>
+<div class="top-menu-item current-affairs">
+<a href="https://www.tutorialspoint.com/current_affairs.htm" target="_blank" title="Daily Current Affairs"><i class="fal fa-layer-plus"></i> <span>Current Affairs</span></a>
+</div>
+<div class="top-menu-item upsc-notes">
+<a href="https://www.tutorialspoint.com/upsc_ias_exams.htm" target="_blank" title="UPSC IAS Exams Notes - TutorialsPoint"><i class="fal fa-user-tie"></i> <span>UPSC Notes</span></a>
+</div>      
+<div class="top-menu-item articles">
+<a href="https://www.tutorialspoint.com/tutor_connect/index.php" target="_blank" title="Top Online Tutors - Tutor Connect"><i class="fal fa-user"></i> <span>Online Tutors</span></a>
+</div>
+<div class="top-menu-item whiteboard">
+<a href="https://www.tutorialspoint.com/whiteboard.htm" target="_blank" title="Free Online Whiteboard"><i class="fal fa-chalkboard"></i> <span>Whiteboard</span></a>
+</div>
+<div class="top-menu-item net-meeting">
+<a href="https://www.tutorialspoint.com/netmeeting.php" target="_blank" title="A free tool for online video conferencing"><i class="fal fa-chalkboard-teacher"></i> <span>Net Meeting</span></a> 
+</div>
+<div class="top-menu-item articles">
+<a href="https://www.tutorix.com" target="_blank" title="Tutorx - The Best Learning App" rel="nofollow"><i class="fal fa-video"></i> <span>Tutorix</span></a> 
+</div>        
+<div class="top-menu-item qa login">
+<a href="/videotutorials/login.php" target="_blank" title="Tutorials Point - Login"><i class="fa fa-sign-in-alt"></i> <span>Login</span></a> 
+</div>        
+<div class="top-menu-item qa login">
+<a href="/videotutorials/subscription.php" target="_blank" title="Paid Package"><i class="fa fa-book-reader"></i> <span>Packages</span></a> 
+</div>        
+<div class="social-menu-item">
+<a href="https://www.facebook.com/tutorialspointindia" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Facebook"><i class="fab fa-facebook-f"></i></a> 
+<a href="https://www.twitter.com/tutorialspoint" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Linkedin"><i class="fab fa-linkedin-in"></i></a>
+<a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint YouTube"><i class="fab fa-youtube"></i></a>
+</div>        
+</div>
+</div>
+<!-- Top sub-menu Ends Here -->
+<!-- Top main-menu Starts Here -->
+<div class="mui-appbar mui-container-fulid mui--appbar-line-height mui--z1" id="logo-menu">
+<div class="mui-container">
+<div class="left-menu">
+<a href="https://www.tutorialspoint.com/index.htm" title="Tutorialspoint">
+<img class="tp-logo" alt="tutorialspoint" src="/vsam/images/logo.png">
+</a>
+<div class="mui-dropdown">
+<a class="mui-btn mui-btn--primary categories" data-mui-toggle="dropdown"><i class="fa fa-th-large"></i> 
+<span>Categories <span class="mui-caret"></span></span></a>            
+<ul class="mui-dropdown__menu cat-menu">
+<li>
+<ul>
+<li><a href="/academic_tutorials.htm"><i class="fa fa-caret-right"></i> Academic Tutorials</a></li>
+<li><a href="/big_data_tutorials.htm"><i class="fa fa-caret-right"></i> Big Data &amp; Analytics </a></li>
+<li><a href="/computer_programming_tutorials.htm"><i class="fa fa-caret-right"></i> Computer Programming </a></li>
+<li><a href="/computer_science_tutorials.htm"><i class="fa fa-caret-right"></i> Computer Science </a></li>
+<li><a href="/database_tutorials.htm"><i class="fa fa-caret-right"></i> Databases </a></li>
+<li><a href="/devops_tutorials.htm"><i class="fa fa-caret-right"></i> DevOps </a></li>
+<li><a href="/digital_marketing_tutorials.htm"><i class="fa fa-caret-right"></i> Digital Marketing </a></li>
+<li><a href="/engineering_tutorials.htm"><i class="fa fa-caret-right"></i> Engineering Tutorials </a></li>
+<li><a href="/upsc_ias_exams.htm"><i class="fa fa-caret-right"></i> Exams Syllabus </a></li>
+<li><a href="/famous_monuments.htm"><i class="fa fa-caret-right"></i> Famous Monuments </a></li>
+<li><a href="/gate_exams_tutorials.htm"><i class="fa fa-caret-right"></i> GATE Exams Tutorials</a></li>
+<li><a href="/latest_technologies.htm"><i class="fa fa-caret-right"></i> Latest Technologies </a></li>
+<li><a href="/machine_learning_tutorials.htm"><i class="fa fa-caret-right"></i> Machine Learning </a></li>
+<li><a href="/mainframe_tutorials.htm"><i class="fa fa-caret-right"></i> Mainframe Development </a></li>
+<li><a href="/management_tutorials.htm"><i class="fa fa-caret-right"></i> Management Tutorials </a></li>
+<li><a href="/maths_tutorials.htm"><i class="fa fa-caret-right"></i> Mathematics Tutorials</a></li>
+<li><a href="/microsoft_technologies_tutorials.htm"><i class="fa fa-caret-right"></i> Microsoft Technologies </a></li>
+<li><a href="/misc_tutorials.htm"><i class="fa fa-caret-right"></i> Misc tutorials </a></li>
+<li><a href="/mobile_development_tutorials.htm"><i class="fa fa-caret-right"></i> Mobile Development </a></li>
+<li><a href="/java_technology_tutorials.htm"><i class="fa fa-caret-right"></i> Java Technologies </a></li>
+<li><a href="/python_technologies_tutorials.htm"><i class="fa fa-caret-right"></i> Python Technologies </a></li>
+<li><a href="/sap_tutorials.htm"><i class="fa fa-caret-right"></i> SAP Tutorials </a></li>
+<li><a href="/scripting_lnaguage_tutorials.htm"><i class="fa fa-caret-right"></i>Programming Scripts </a></li>
+<li><a href="/selected_reading.htm"><i class="fa fa-caret-right"></i> Selected Reading </a></li>
+<li><a href="/software_quality_tutorials.htm"><i class="fa fa-caret-right"></i> Software Quality </a></li>
+<li><a href="/soft_skill_tutorials.htm"><i class="fa fa-caret-right"></i> Soft Skills </a></li>
+<li><a href="/telecom_tutorials.htm"><i class="fa fa-caret-right"></i> Telecom Tutorials </a></li>
+<li><a href="/upsc_ias_exams.htm"><i class="fa fa-caret-right"></i> UPSC IAS Exams </a></li>
+<li><a href="/web_development_tutorials.htm"><i class="fa fa-caret-right"></i> Web Development </a></li>
+<li><a href="/sports_tutorials.htm"><i class="fa fa-caret-right"></i> Sports Tutorials </a></li>
+<li><a href="/xml_technologies_tutorials.htm"><i class="fa fa-caret-right"></i> XML Technologies </a></li>
+<li><a href="/multi_language_tutorials.htm"><i class="fa fa-caret-right"></i> Multi-Language</a></li>
+<li><a href="/questions_and_answers.htm"><i class="fa fa-caret-right"></i> Interview Questions</a></li>
+</ul>
+</li>
+</ul>
+<div class="clear"></div>
+</div> 
+</div>
+<div class="right-menu">
+<div class="toc-toggle">
+<a href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+</div>
+<div class="mobile-search-btn">
+<a href="https://www.tutorialspoint.com/index.htm"><i class="fal fa-search"></i></a>
+</div>
+<div class="search-box">
+<script async src="https://cse.google.com/cse.js?cx=000263362972888060243:yfed6eu421q"></script>
+<div class='gcse-search'></div>
+</div>
+<div class="menu-btn library-btn">
+<a href="https://www.tutorialspoint.com/tutorialslibrary.htm"><i class="fal fa-cubes"></i> <span>Library</span></a>
+</div>
+<div class="menu-btn videos-btn">
+<a href="https://www.tutorialspoint.com/videotutorials/index.php"><i class="fal fa-video"></i> <span>Videos</span></a> 
+</div>
+<div class="menu-btn videos-btn">
+<a href="https://www.tutorialspoint.com/questions/index.php"><i class="fa fa-location-arrow"></i> <span>Q/A</span></a>
+</div>
+<div class="menu-btn ebooks-btn">
+<a href="https://store.tutorialspoint.com"><i class="fal fa-book"></i> <span>eBooks</span></a>
+</div>
+<div class="mui-dropdown">
+<button class="mui-btn mui-btn--primary mobile-menu" data-mui-toggle="dropdown">
+<span class="mui-caret"></span>
+</button>
+<ul class="mui-dropdown__menu">
+<li class="login"><a href="https://www.tutorialspoint.com/videotutorials/login.php"><i class="fal fa-sign-in-alt"></i> <span>Login</span></a></li>
+<li><a href="https://www.tutorialspoint.com/tutorialslibrary.htm"><i class="fal fa-cubes"></i> <span>Library</span></a></li>
+<li><a href="https://www.tutorialspoint.com/videotutorials/index.php"><i class="fal fa-video"></i> <span>Videos</span></a></li>
+<li><a href="https://store.tutorialspoint.com"><i class="fal fa-book"></i> <span>eBooks</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Top main-menu Ends Here -->
+</header>
+<div class="mui-container-fluid content">
+<div class="mui-container">
+<!-- Tutorial ToC Starts Here -->
+<div class="mui-col-md-3 tutorial-toc">
+<div class="mini-logo">
+<img src="/vsam/images/vsam-mini-logo.jpg" alt="VSAM Tutorial" />
+</div>
+<ul class="toc chapters">
+<li><a class="videolink" href="/vsam_online_training/index.asp" target="_blank"><img src="/vsam/images/vsam-video-tutorials.jpg" alt="VSAM Video Tutorials" /></a></li>
+</ul>
+<ul class="toc chapters">
+<li class="heading">Learn VSAM Tutorial</li>
+<li><a href="/vsam/index.htm">VSAM - Home</a></li>
+<li><a href="/vsam/vsam_overview.htm">VSAM - Overview</a></li>
+<li><a href="/vsam/vsam_components.htm">VSAM - Components</a></li>
+<li><a href="/vsam/vsam_cluster.htm">VSAM - Cluster</a></li>
+<li><a href="/vsam/vsam_esds.htm">VSAM - ESDS</a></li>
+<li><a href="/vsam/vsam_ksds.htm">VSAM - KSDS</a></li>
+<li><a href="/vsam/vsam_rrds.htm">VSAM - RRDS</a></li>
+<li><a href="/vsam/vsam_lds.htm">VSAM - LDS</a></li>
+<li><a href="/vsam/vsam_commands.htm">VSAM - Commands</a></li>
+<li><a href="/vsam/vsam_alternate_index.htm">VSAM - Alternate Index</a></li>
+<li><a href="/vsam/vsam_catalog.htm">VSAM - Catalog</a></li>
+<li><a href="/vsam/vsam_file_status.htm">VSAM - File Status</a></li>
+<li><a href="/vsam/vsam_interview_questions.htm">VSAM - Interview Questions</a></li>
+</ul>
+<ul class="toc chapters">
+<li class="heading">VSAM Useful Resources</li>
+<li><a href="/vsam/vsam_quick_guide.htm">VSAM - Quick Guide</a></li>
+<li><a href="/vsam/vsam_useful_resources.htm">VSAM - Useful Resources</a></li>
+<li><a href="/vsam/vsam_discussion.htm">VSAM - Discussion</a></li>
+</ul>
+<ul class="toc reading">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="/upsc_ias_exams.htm">UPSC IAS Exams Notes</a></li>
+<li><a target="_top" href="/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+<div id="stickyparent">
+<div style="height:250px;width:300px;" id="sticky-ad">
+<div id="430c9911-782f-495d-88f9-69f58ca8c9a4" class="_ap_apex_ad" >
+<script>
+var adpushup = adpushup || {};
+adpushup.que = adpushup.que || [];
+adpushup.que.push(function() {
+adpushup.triggerAd("430c9911-782f-495d-88f9-69f58ca8c9a4");
+});
+</script>
+</div>
+</div>
+</div>
+</div>
+<!-- Tutorial ToC Ends Here -->
+<!-- Tutorial Content Starts Here -->
+<div class="mui-col-md-6 tutorial-content">
+<h1>VSAM - Quick Guide</h1>
+<hr />
+<div id="google-top-ads">
+<div class="top-ad-heading">Advertisements</div>
+<div style="text-align:center" class="google-top-ads">
+<div id="adp_top_ads" style="text-align:center!important;min-height:90px!important"></div>
+<script>
+     var adPos = document.getElementById('adp_top_ads');
+     var ad_id_720 = "8014640d-fd34-4b2e-9b1b-cc67234a2325";
+     var ad_id_650 = "2d1bb2c4-eb72-471d-9c80-1bf5514728c1";
+     var ad_id_300 = "df94a1a9-ae2f-432d-9a92-d93823ff4503";
+     var width = window.innerWidth;
+     var ad_id = ad_id_720;
+     if( width <= 768 ){
+        ad_id =  ad_id_300;
+     }else if( width <= 1435 ){
+        ad_id =  ad_id_650;
+     }
+     adPos.innerHTML = '<div id="' + ad_id + '" class="_ap_apex_ad"></div>';
+     var adpushup = adpushup || {};
+     adpushup.que = adpushup.que || [];
+     adpushup.que.push(function() {
+     adpushup.triggerAd(ad_id);
+     });
+</script>
+</div>
+</div>
+<br>
+<div class="mui-container-fluid button-borders">
+<div class="pre-btn">
+<a href="/vsam/vsam_interview_questions.htm"><i class="fal fa-chevron-circle-left"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="/vsam/vsam_useful_resources.htm">Next Page <i class="fal fa-chevron-circle-right"></i>&nbsp;</a>
+</div>
+</div>
+<div class="clearer"></div>
+<h1>VSAM - Overview</h1>
+<p>Virtual Storage Access Method (VSAM) is high performance access method and data set organization, which organizes and maintains data via a catalog structure. It utilizes virtual storage concept and can protect datasets at various levels by giving passwords. VSAM can be used in COBOL programs like physical sequential files. VSAM are the logical datasets for storing records. Files can be read sequentially and randomly in VSAM. It is an improved way of storing data which overcomes some of the limitations of conventional file systems like Sequential Files.</p>
+<h2>Characteristics of VSAM</h2>
+<p>Following are the characteristics of VSAM &minus;</p>
+<ul class="list">
+<li><p>VSAM protects data against unauthorized access by using passwords.</p></li>
+<li><p>VSAM provides fast access to data sets.</p></li>
+<li><p>VSAM has options for optimizing performance.</p></li>
+<li><p>VSAM allows data set sharing in both batch and online environment.</p></li>
+<li><p>VSAM are more structured and organized in storing data.</p></li>
+<li><p>Free space is reused automatically in VSAM files.</p></li>
+</ul>
+<h2>Limitations of VSAM</h2>
+<p>The only limitation of VSAM is that it cannot be stored on TAPE volume. It is always stored on DASD space. It requires a number of cylinders to store the data which is not cost-effective.</p>
+<h1>VSAM - Components</h1>
+<p>VSAM consists of following components &minus;</p>
+<ul class="list">
+<li>VSAM Cluster</li>
+<li>Control Area</li>
+<li>Control Interval</li>
+</ul>
+<h2>VSAM Cluster</h2>
+<p>VSAM are the logical datasets for storing records and are known as clusters. A cluster is an association of the index, sequence set and data portions of the dataset. The space occupied by a VSAM cluster is divided in contiguous areas called </b>Control Intervals</b>. We will discuss about control intervals later in this module.</p>
+<p>There are two main components in a VSAM cluster &minus;</p>
+<ul class="list">
+<li><p><b>Index Component</b> contains the index part. Index records are present in Index component. Using index component VSAM is able to retrieve records from the data component.</p></li>
+<li><p><b>Data Component</b> contains the data part. Actual data records are present in Data component.</p></li>
+</ul>
+<h2>Control Interval</h2>
+<p>Control Intervals (CI) in VSAM are equivalent to blocks for non-VSAM data sets. In non-VSAM methods, the unit of data is defined by the block. VSAM works with logical data area which is known as Control Intervals.</p> 
+<p>Control Intervals are the smallest unit of transfer between a disk and the operating system. Whenever a record is retrieved directly from the storage, the entire CI containing the record is read into VSAM Input-Output buffer. The desired record is then transferred to work area from VSAM buffer.</p>
+<p>Control Interval consists of &minus;</p>
+<ul class="list">
+<li>Logical Records</li>
+<li>Control information fields</li>
+<li>Free Space</li>
+</ul>
+<p>When a VSAM dataset is loaded, control intervals are created. The default Control Interval size is 4K bytes and it can extend up to 32K bytes.</p>
+<h2>Analysis of Control Interval</h2>
+<img src="/vsam/images/control_interval.png" alt="Control Interval" />
+<p>Following is the description of terms used in above program &minus;</p>
+<ul class="list">
+<li><p><b>R1..R5</b> &minus; Records which are stored in Control Interval.</p></li>
+<li><p><b>FS</b> &minus; FS is free space, which can be used for further expansion of dataset.</p></li>
+<li><p><b>RDF</b> &minus; RDF is known as Record Definition Fields. RDF are 3 bytes long. It describes the length of records and tells how many adjacent records are of the same length.</p></li>
+<li><p><b>CIDF</b> &minus; CIDF is known as Control Interval Definition Fields. CIDF are 4 bytes long and contain information about the Control Interval.</p></li>
+</ul>
+<h2>Control Area</h2>
+<p>A Control Area (CA) is formed by putting together two or more Control Intervals. A VSAM dataset is composed of one or more Control Areas. The size of VSAM is always a multiple of its Control Area. VSAM files are extended in units of Control Areas.</p>
+<p>Following is the example of Control Area &minus;</p>
+<img src="/vsam/images/control_area.png" alt="Control Area" />
+<h1>VSAM - Cluster</h1>
+<p>VSAM cluster is defined in <b>JCL</b>. JCL uses <b>IDCAMS</b> utility to create a cluster. IDCAMS is a utility, developed by IBM, for access method services. It is used to primarily define VSAM datasets.</p>
+<h2>Defining a Cluster</h2>
+<p>The following syntax shows the main parameters which are grouped under <b>Define Cluster, Data</b> and <b>Index</b>.</p>
+<pre class="result notranslate">
+.DEFINE CLUSTER (NAME(vsam-file-name)      -
+BLOCKS(number)                             -
+VOLUMES(volume-serial)                     -
+[INDEXED / NONINDEXED / NUMBERED / LINEAR] -
+RECSZ(average maximum)                     -
+[FREESPACE(CI-Percentage,CA-Percentage)]   -
+CISZ(number)                               -
+[KEYS(length offset)]                      -
+[READPW(password)]                         -
+[FOR(days)|TO(date)]                       -
+[UPDATEPW(password)]                       -
+[REUSE / NOREUSE] )                        -
+DATA                                       -
+   (NAME(vsam-file-name.data))             -
+INDEX                                      -
+   (NAME(vsam-file-name.index))            -
+CATALOG(catalog-name[/password]))            
+</pre>
+<p>Parameters at the CLUSTER level apply to the entire cluster. Parameters at the DATA or INDEX level apply only to the data or index component.</p>
+<p>We will discuss each parameter in detail in the following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Parameters with Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td><p><b>DEFINE CLUSTER</b></p>
+<p>Define Cluster command is used to define a cluster and specify parameter attributes for the cluster and its components.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td><p><b>NAME</b></p>
+<p>NAME specifies the name of VSAM file for which we are defining the cluster.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td><p><b>BLOCKS</b></p>
+<p>Blocks specifies the number of blocks assigned for the cluster.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td><p><b>VOLUMES</b></p>
+<p>Volumes specifies one or more volumes that will contain the cluster or component.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td><p><b>INDEXED / NONINDEXED / NUMBERED / LINEAR</b></p>
+<p>This parameter can take three values INDEXED, NONINDEXED or NUMBERED depending upon the type of dataset we are creating. For key-sequenced(KSDS) files INDEXED option is used. For entry-sequenced(ESDS) files the NONINDEXED option is used. For relative-record(RRDS) files the NUMBERED option is required. For Linear(LDS) files the LINEAR option is required. The default value of this parameter is INDEXED. We will discuss more about KSDS, ESDS, RRDS and LDS in coming modules.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">6</td>
+<td><p><b>RECSZ</b></p>
+<p>Record Size parameter has two values which are Average and Maximum record size. The Average specifies the average length of the logical records in the file and the Maximum denotes the length of the records.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">7</td>
+<td><p><b>FREESPACE</b></p>
+<p>Freespace specifies the percentage of free space to reserve for the control intervals (CI) and control areas (CA) of the data component. The default value of this parameter is zero percentage.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">8</td>
+<td><p><b>CISZ</b></p>
+<p>CISZ is known as Control interval size. It specifies the size of control intervals.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">9</td>
+<td><p><b>KEYS</b></p>
+<p>Keys parameter is defined only in key-sequenced (KSDS) files. It specifies the length and offset of primary key from first column. The range of value of this parameter are from 1 to 255 bytes.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">10</td>
+<td><p><b>READPW</b></p>
+<p>Value in READPW parameter specifies the password of read level.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">11</td>
+<td><p><b>FOR/TO</b></p>
+<p>The value of this parameter specifies the amount of time in terms of date and days for retaining the file. The default value for this parameter is zero days.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">12</td>
+<td><p><b>UPDATEPW</b></p>
+<p>Value in UPDATEPW parameter specifies the password of update level.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">13</td>
+<td><p><b>REUSE / NOREUSE</b></p>
+<p>REUSE parameter allows clusters to be defined that may be reset to empty status without deleting and re-defining them.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">14</td>
+<td><p><b>DATA - NAME</b></p>
+<p>The DATA part of the cluster contains the dataset name which contains the actual data of the file.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">15</td>
+<td><p><b>INDEX-NAME</b></p>
+<p>The INDEX part of the cluster contains the primary key and the memory pointer for the corresponding record in the data part. It is defined when a Key Sequenced cluster is used.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">16</td>
+<td><p><b>CATALOG</b></p>
+<p>Catalog parameter denotes the catalog under which the file will be defined. We will discuss about catalog separately in upcoming modules.</p></td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Following is a basic example to show how to define a cluster in JCL &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE CLUSTER (NAME(MY.VSAM.KSDSFILE)  -
+   INDEXED                                 -
+   RECSZ(80 80)                            -
+   TRACKS(1,1)                             -
+   KEYS(5  0)                              -
+   CISZ(4096)                              -                            
+   FREESPACE(3 3) )                        -
+   DATA (NAME(MY.VSAM.KSDSFILE.DATA))      -
+   INDEX (NAME(MY.VSAM.KSDSFILE.INDEX))
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.KSDSFILE VSAM file.</p>
+<h2>Deleting a Cluster</h2>
+<p>To delete a VSAM file, the VSAM cluster needs to be deleted using IDCAMS utility. DELETE command removes the entry of the VSAM cluster from the catalog and optionally removes the file, thereby freeing up the space occupied by the object. If the VSAM data set is not expired then it will not be deleted. To delete such types of datasets use PURGE option.</p>
+<pre class="result notranslate">
+DELETE data-set-name CLUSTER  
+[ERASE / NOERASE] 
+[FORCE / NOFORCE] 
+[PURGE / NOPURGE] 
+[SCRATCH / NOSCRATCH]
+</pre>
+<p>Above syntax shows the parameters which we can use with Delete statement. We will discuss each of them in detail in following table &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No</th>
+<th style="text-align:center;">Parameters with Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td>
+<p><b>ERASE / NOERASE</b></p>
+<p>ERASE option is specified to override the ERASE attribute specified for the object in the catalog. NOERASE option is taken by default.</p></td></tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td>
+<p><b>FORCE / NOFORCE</b></p>
+<p>FORCE option is specified to delete the SPACE and USERCATALOG even if they are not empty. NOFORCE option is taken by default.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td>
+<p><b>PURGE / NOPURGE</b></p>
+<p>PURGE option is used to delete the VSAM dataset if dataset has not expired. NOPURGE option is taken by default.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td>
+<p><b>SCRATCH / NOSCRATCH</b></p>
+<p>SCRATCH option is specified to remove the associated entry for the object from the Volume Table of Contents. It is mainly used for non-vsam datasets like GDGs. NOSCRATCH option is taken by default.</p></td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Following is a basic example to show how to delete a cluster in JCL &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEPNAME EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DELETE MY.VSAM.KSDSFILE CLUSTER
+	PURGE
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will delete MY.VSAM.KSDSFILE VSAM file.</p>
+<h1>VSAM - ESDS</h1>
+<p>ESDS is known as Entry Sequenced Data Set. An entry-sequenced data set behaves like sequential file organization with some more features included. We can access the records directly and for safety purpose we can use passwords also. We must code <b>NONINDEXED</b> inside the DEFINE CLUSTER command for ESDS datasets. Following are the key features of ESDS &minus;</p>
+<ul class="list">
+<li><p>Records in ESDS cluster are stored in the order in which they were inserted into the dataset.</p></li>
+<li><p>Records are referenced by physical address which is known as <b>Relative Byte Address (RBA)</b>. Suppose if in an ESDS dataset, we have 80 byte records, the RBA of first record will be 0, RBA for second record will be 80, for third record it will be 160 and so on.</p></li>
+<li><p>Records can be accessed sequentially by RBA which is known as <b>addressed access.</b></p></li>
+<li><p>Records are held in the order in which they were inserted. New records are inserted at the end.</p></li>
+<li><p>Deletion of records is not possible in ESDS dataset. But they can be marked as inactive.</p></li>
+<li><p>Records in ESDS dataset can be of fixed length or variable length.</p></li>
+<li><p>ESDS is non-indexed. Keys are not present in ESDS dataset, so it may contain duplicate records.</p></li>
+<li><p>ESDS can be used in COBOL programs like any other file. We will specify the file name in JCL and we can use the ESDS file for processing inside program. In COBOL program specify file organization as <b>Sequential</b> and access mode  as <b>Sequential</b> with ESDS dataset.</p></li>
+</ul>
+<h2>Defining ESDS cluster</h2>
+<p>The following syntax shows which parameters we can use while creating ESDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<pre class="result notranslate">
+DEFINE CLUSTER (NAME(esds-file-name)     -
+BLOCKS(number)                           -
+VOLUMES(volume-serial)                   -
+NONINDEXED                               -
+RECSZ(average maximum)                   -
+[FREESPACE(CI-Percentage,CA-Percentage)] -
+CISZ(number)                             -
+[READPW(password)]                       -
+[FOR(days)|TO(date)]                     -
+[UPDATEPW(password)]                     -
+[REUSE / NOREUSE])                       -
+DATA                                     -
+   (NAME(esds-file-name.data))  
+</pre>
+<h3>Example</h3>
+<p>Following example shows how to create an ESDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE CLUSTER (NAME(MY.VSAM.ESDSFILE)  -
+   NONINDEXED                              -
+   RECSZ(80 80)                            -
+   TRACKS(1,1)                             -
+   CISZ(4096)                              -                            
+   FREESPACE(3 3) )                        -
+   DATA (NAME(MY.VSAM.ESDSFILE.DATA))      
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.ESDSFILE VSAM file.</p>
+<h2>Deleting ESDS Cluster</h2>
+<p>ESDS cluster is deleted using IDCAMS utility. DELETE command removes the entry of the VSAM cluster from the catalog and optionally removes the file, thereby freeing up the space occupied by the object.</p>
+<pre class="result notranslate">
+DELETE data-set-name CLUSTER  
+[ERASE / NOERASE] 
+[FORCE / NOFORCE] 
+[PURGE / NOPURGE] 
+[SCRATCH / NOSCRATCH]
+</pre>
+<p>Above syntax shows which parameters we can use while deleting ESDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<h3>Example</h3>
+<p>Following example shows how to delete an ESDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEPNAME EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DELETE MY.VSAM.ESDSFILE CLUSTER
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will delete MY.VSAM.ESDSFILE VSAM Cluster.</p>
+<h1>VSAM - KSDS</h1>
+<p>KSDS is known as Key Sequenced Data Set. A key-sequenced data set (KSDS) is more complex than ESDS and RRDS but is more useful and versatile. We must code <b>INDEXED</b> inside the DEFINE CLUSTER command for KSDS datasets. KSDS cluster consists of following two components &minus;</p>
+<ul class="list">
+<li><p><b>Index</b> &minus; The index component of the KSDS cluster contains the list of key values for the records in the cluster with pointers to the corresponding records in the data component. Index component refers the physical address of a KSDS record. This relates the key of each record to the record's relative location in the data set. When a record is added or deleted, this index is updated accordingly. </p></li>
+<li><p><b>Data</b> &minus; The data component of the KSDS cluster contains the actual data. Each record in the data component of a KSDS cluster contains a key field with same number of characters and occur in the same relative position in each record.</p></li>
+</ul>
+<p>Following are the key features of KSDS &minus;</p>
+<ul class="list">
+<li><p>Records within KSDS data set are always kept sorted by key-field. Records are stored in ascending, collating sequence by key.</p></li>
+<li><p>Records can be accessed sequentially and direct access is also possible.</p></li>
+<li><p>Records are identified using a key. The key of each record is a field in a predefined position within the record. Each key must be unique in KSDS dataset. So duplication of records is not possible.</p></li>
+<li><p>When new records are inserted, the logical order of the records depends on the collating sequence of the key field.</p></li>
+<li><p>Records in KSDS dataset can be of fixed length or variable length.</p></li>
+<li><p>KSDS can be used in <b>COBOL</b> programs like any other file. We will specify the file name in JCL and we can use the KSDS file for processing inside program. In COBOL program specify file organization as <b>Indexed</b> and you can use any access mode <b>(Sequential, Random or Dynamic)</b> with KSDS dataset.</p></li>
+</ul>
+<h2>KSDS File Structure</h2>
+<p>In order to search for a particular record, we give a unique key value. Key value is searched in the index component. Once key is found the corresponding memory address which refers to the data component is retrieved. From the memory address we can fetch the actual data which is stored in the data component. Following example shows the basic structure of index and data file &minus;</p>
+<img src="/vsam/images/ksds_structure.png" alt="KSDS Structure" />
+<h2>Defining KSDS Cluster</h2>
+<p>The following syntax shows which parameters we can use while creating KSDS cluster.</p>
+<p>The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<pre class="result notranslate">
+DEFINE CLUSTER (NAME(ksds-file-name)     -
+BLOCKS(number)                           -
+VOLUMES(volume-serial)                   -
+INDEXED                                  -
+KEYS(length offset)                      -
+RECSZ(average maximum)                   -
+[FREESPACE(CI-Percentage,CA-Percentage)] -
+CISZ(number)                             -
+[READPW(password)]                       -
+[FOR(days)|TO(date)]                     -
+[UPDATEPW(password)]                     -
+[REUSE / NOREUSE])                       -
+DATA                                     -
+   (NAME(ksds-file-name.data))           -
+INDEX                                    -
+   (NAME(ksds-file-name.index)) 
+</pre>
+<h3>Example</h3>
+<p>Following example shows how to create an KSDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE CLUSTER (NAME(MY.VSAM.KSDSFILE)  -
+   INDEXED                                 -
+   KEYS(6 1)	                           -	
+   RECSZ(80 80)                            -
+   TRACKS(1,1)                             -
+   CISZ(4096)                              -                            
+   FREESPACE(3 3) )                        -
+   DATA (NAME(MY.VSAM.KSDSFILE.DATA))      -
+   INDEX (NAME(MY.VSAM.KSDSFILE.INDEX))    -
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.KSDSFILE VSAM file.</p>
+<h2>Deleting KSDS Cluster</h2>
+<p>KSDS cluster is deleted using IDCAMS utility. DELETE command removes the entry of the VSAM cluster from the catalog and optionally removes the file, thereby freeing up the space occupied by the object.</p>
+<pre class="result notranslate">
+DELETE data-set-name CLUSTER  
+[ERASE / NOERASE] 
+[FORCE / NOFORCE] 
+[PURGE / NOPURGE] 
+[SCRATCH / NOSCRATCH]
+</pre>
+<p>Above syntax shows which parameters we can use while deleting KSDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<h3>Example</h3>
+<p>Following example shows how to delete an KSDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEPNAME EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DELETE MY.VSAM.KSDSFILE CLUSTER
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will delete MY.VSAM.KSDSFILE VSAM Cluster.</p>
+<h1>VSAM - RRDS</h1>
+<p>RRDS is known as Relative Record Data Set. RRDS cluster is similar to an ESDS cluster. The only difference is that RRDS records are accessed by <b>Relative Record Number (RRN)</b>, we must code <b>NUMBERED</b> inside the DEFINE CLUSTER command. Following are the key features of RRDS &minus;</p>
+<ul class="list">
+<li><p>A Relative record dataset has records that are identified by the <b>Relative Record Number (RRN)</b>, which is the sequence number relative to the first record.</p></li>
+<li><p>RRDS allows access of records by number like record 1, record 2, and so on. This provides random access and assumes the application  program has a way to get the desired record numbers.</p></li>
+<li><p>The records in an RRDS dataset can be accessed sequentially, in relative record number order, or directly, by supplying the relative record number of the desired record.</p></li>
+<li><p>The records in a RRDS dataset are stored in fixed length slots. Each record is referenced by the number of its slot, number can vary from 1 to the maximum number of records in the dataset.</p></li>
+<li><p>Records in a RRDS can be written by inserting new record into an empty slot.</p></li>
+<li><p>Records can be deleted from an RRDS cluster, thereby leaving an empty slot.</p></li>
+<li><p>Applications which use fixed-length records or a record number with contextual meaning that can use RRDS datasets.</p></li>
+<li><p>RRDS can be used in <b>COBOL</b> programs like any other file. We will specify the file name in JCL and we can use the KSDS file for processing inside program. In COBOL program specify file organization as <b>RELATIVE</b> and you can use any access mode <b>(Sequential, Random or Dynamic)</b> with RRDS dataset.</p></li>
+</ul>
+<h2>RRDS File Structure</h2>
+<p>Space is divided into fixed length slots in RRDS file structure. A slot can be either completely vacant or completely full. Thus, new records can be added to empty slots and existing records can be deleted from slots which are filled. We can access any record directly by giving Relative Record Number. Following example shows the basic structure of data file &minus;</p>
+<h3>Data Component</h3>
+<table class="table table-bordered">
+<tr>
+<th>Relative Record Number</th>
+<th>Record Field 1</th>
+<th>Record Field 2</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td>Tutorial</td>
+<td>Point</td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td>Mohtashim</td>
+<td>M.</td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td>Nishant</td>
+<td>Malik</td>
+</tr>
+</table>
+<h2>Defining RRDS Cluster</h2>
+<p>The following syntax shows which parameters we can use while creating RRDS cluster.</p>
+<p>The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<pre class="result notranslate">
+DEFINE CLUSTER (NAME(rrds-file-name)     -
+BLOCKS(number)                           -
+VOLUMES(volume-serial)                   -
+NUMBERED                                 -
+RECSZ(average maximum)                   -
+[FREESPACE(CI-Percentage,CA-Percentage)] -
+CISZ(number)                             -
+[READPW(password)]                       -
+[FOR(days)|TO(date)]                     -
+[UPDATEPW(password)]                     -
+[REUSE / NOREUSE])                       -
+DATA                                     -
+   (NAME(rrds-file-name.data))           
+</pre>
+<h3>Example</h3>
+<p>Following example shows how to create an RRDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE CLUSTER (NAME(MY.VSAM.RRDSFILE)  -
+   NUMBERED                                -
+   RECSZ(80 80)                            -
+   TRACKS(1,1)                             -
+   REUSE                                   - 
+   FREESPACE(3 3) )                        -
+   DATA (NAME(MY.VSAM.RRDSFILE.DATA))      
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.RRDSFILE VSAM file.</p>
+<h2>Deleting RRDS Cluster</h2>
+<p>RRDS cluster is deleted using IDCAMS utility. DELETE command removes the entry of the VSAM cluster from the catalog and optionally removes the file, thereby freeing up the space occupied by the object.</p>
+<pre class="result notranslate">
+DELETE data-set-name CLUSTER  
+[ERASE / NOERASE] 
+[FORCE / NOFORCE] 
+[PURGE / NOPURGE] 
+[SCRATCH / NOSCRATCH]
+</pre>
+<p>Above syntax shows which parameters we can use while deleting RRDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module. </p>
+<h3>Example</h3>
+<p>Following example shows how to delete an RRDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEPNAME EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DELETE MY.VSAM.RRDSFILE CLUSTER
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will delete MY.VSAM.RRDSFILE VSAM Cluster.</p>
+<h1>VSAM - LDS</h1>
+<p>LDS is known as Linear Data Set. Linear dataset is the only form of byte-stream dataset which is used in used in traditional operating system files. Linear datasets are rarely used. Following are the key features of LDS &minus;</p>
+<ul class="list">
+<li><p>Linear datasets does not contain RDF's and CIDF's as it does not have any control information embedded in its CI.</p></li>
+<li><p>Data that can be accessed as byte-addressable strings in virtual storage in Linear datasets.</p></li>
+<li><p>Linear datasets has a control interval size of 4KBytes.</p></li>
+<li><p>LDS is a kind of non-vsam file with some VSAM facilities like use of IDCAMS and VSAM specific information in the catalog.</p></li>
+<li><p>DB2 is currently the biggest user of Linear Data Sets.</p></li>
+<li><p>IDCAMS is used to define an LDS but it is accessed using a Data-In-Virtual (DIV) macro.</p></li>
+<li><p>Linear dataset does not have concepts of records. All LDS bytes are data bytes. </p></li>
+</ul>
+<h2>Defining LDS cluster</h2>
+<p>The following syntax shows which parameters we can use while creating LDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<pre class="result notranslate">
+DEFINE CLUSTER (NAME(lds-file-name)      -
+BLOCKS(number)                           -
+VOLUMES(volume-serial)                   -
+LINEAR                                   -
+CISZ(number)                             -
+[READPW(password)]                       -
+[FOR(days)|TO(date)]                     -
+[UPDATEPW(password)]                     -
+[REUSE / NOREUSE])                       -
+DATA                                     -
+   (NAME(lds-file-name.data))  
+</pre>
+<h3>Example</h3>
+<p>Following example shows how to create an LDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE CLUSTER (NAME(MY.VSAM.LDSFILE)   -
+   LINEAR                                  -
+   TRACKS(1,1)                             -
+   CISZ(4096) )                            -                            
+   DATA (NAME(MY.VSAM.LDSFILE.DATA))      
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.LDSFILE VSAM file.</p>
+<h2>Deleting LDS Cluster</h2>
+<p>LDS cluster is deleted using IDCAMS utility. DELETE command removes the entry of the VSAM cluster from the catalog and optionally removes the file, thereby freeing up the space occupied by the object.</p>
+<pre class="result notranslate">
+DELETE data-set-name CLUSTER  
+[ERASE / NOERASE] 
+[FORCE / NOFORCE] 
+[PURGE / NOPURGE] 
+[SCRATCH / NOSCRATCH]
+</pre>
+<p>Above syntax shows which parameters we can use while deleting LDS cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<h3>Example</h3>
+<p>Following example shows how to delete an LDS cluster in JCL using IDCAMS utility &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEPNAME EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DELETE MY.VSAM.LDSFILE CLUSTER
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will delete MY.VSAM.LDSFILE VSAM Cluster.</p>
+<h1>VSAM - Commands</h1>
+<p>VSAM commands are used to perform certain operations on VSAM datasets. Following are the most useful VSAM commands &minus;</p>
+<ul class="list">
+<li>Alter</li>
+<li>Repro</li>
+<li>Listcat</li>
+<li>Examine</li>
+<li>Verify</li>
+</ul>
+<h2>Alter</h2>
+<p>ALTER command is used to modify VSAM file attributes. We can change the attributes of VSAM file which we have mentioned in VSAM Cluster definition. Following is the syntax to change the attributes &minus;</p>
+<pre class="result notranslate">
+ALTER  file-cluster-name [password] 
+   [ADDVOLUMES(volume-serial)] 
+   [BUFFERSPACE(size)] 
+   [EMPTY / NOEMPTY] 
+   [ERASE / NOERASE] 
+   [FREESPACE(CI-percentage CA-percentage)] 
+   [KEYS(length offset)] 
+   [NEWNAME(new-name)] 
+   [RECORDSIZE(average maximum)] 
+   [REMOVEVOLUMES(volume-serial)] 
+   [SCRATCH / NOSCRATCH] 
+   [TO(date) / FOR(days)] 
+   [UPGRADE / NOUPGRADE] 
+   [CATALOG(catalog-name [password]]
+</pre>
+<p>Above syntax shows which parameters we can alter in an existing VSAM cluster. The parameter description remains the same as mentioned in VSAM - Cluster module.</p>
+<h3>Example</h3>
+<p>Following example shows how to use ALTER command to increase Freespace, to add more volumes and to Alter Keys &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN DD  *
+   ALTER  MY.VSAM.KSDSFILE 
+   [ADDVOLUMES(2)] 
+   [FREESPACE(6 6)] 
+   [KEYS(10 2)] 
+/*
+</pre>  
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will alter the Freespace, Volumes and Keys.</p>
+<h2>Repro</h2>
+<p>REPRO command is used to load data into VSAM dataset. It is also used to copy data from one VSAM data set to another. We can use this command to copy data from sequential file to VSAM file. IDCAMS utility uses REPRO command to load the datasets.</p>
+<pre class="result notranslate">
+REPRO INFILE(in-ddname) 
+   OUTFILE(out-ddname) 
+</pre>  
+<p>In the above syntax, the in-ddname is DD name for the Input Dataset which is having records. The out-ddname is the DD name for the Output Dataset, where the input datasets records will be copied.</p>
+<h3>Example</h3>
+<p>Following example shows how to copy records from one dataset to another VSAM dataset &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//IN  DD DSN = MY.VSAM.KSDSFILE,DISP = SHR
+//OUT DD DSN = MY.VSAM1.KSDSFILE,DISP = SHR
+//SYSPRINT DD  SYSOUT = *
+//SYSIN DD  *
+   REPRO INFILE(IN) 
+      OUTFILE(OUT)
+/*
+</pre>  
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will copy all the records from MY.VSAM.KSDSFILE to MY.VSAM1.KSDSFILE VSAM file.</p>
+<h2>Listcat</h2>
+<p>LISTCAT command is used to get the catalog details of a VSAM dataset. Listcat command provides following information about VSAM datasets &minus;</p>
+<ul class="list">
+<li>SMS Information</li>
+<li>RLS Information</li>
+<li>Volume Information</li>
+<li>Sphere Information</li>
+<li>Allocation Information</li>
+<li>Dataset Attributes</li>
+</ul>
+<pre class="result notranslate">
+LISTCAT ENTRY(vsam-file-name) ALL
+</pre>
+<p>In the above syntax, vsam-file-name is the VSAM dataset name for which we need all the information. ALL keyword is specified to get all catalog details. </p>
+<h3>Example</h3>
+<p>Following example shows how to fetch all the details using Listcat command for a VSAM dataset &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN DD  *
+   LISTCAT ENTRY(MY.VSAM.KSDSFILE) 
+   ALL 
+/*
+</pre>  
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will show all the catalog details about MY.VSAM.KSDSFILE dataset.</p>
+<h2>Examine</h2>
+<p>Examine command is used to check the structural integrity of a key-sequenced data set cluster. It checks for index and data components and if any problem is found, the error messages are sent spool. You can check any of the IDCxxxxx messages.</p>
+<pre class="result notranslate">
+EXAMINE NAME(vsam-ksds-name) -                                    
+   INDEXTEST DATATEST -                  
+   ERRORLIMIT(50)
+</pre>
+<p>In the above syntax, vsam-ksds-name is the VSAM dataset name for which we need to examine index and data part of VSAM cluster.</p>
+<h3>Example</h3>
+<p>Following example shows how to check whether Index and Data part of KSDS dataset are synchronized or not &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN DD  *
+   EXAMINE NAME(MY.VSAM.KSDSFILE) -                                    
+   INDEXTEST DATATEST -                  
+   ERRORLIMIT(50)
+/*
+</pre>  
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will show all problems with the VSAM data set in one of the IDCxxxxx messages in spool.</p>
+<h2>Verify</h2>
+<p>Verify command is used to check and fix VSAM files which have not been closed properly after an error. The command adds correct End-Of-Data records to the file.</p>
+<pre class="result notranslate">
+VERIFY DS(vsam-file-name)                                  
+</pre>
+<p>In the above syntax, vsam-file-name is the VSAM dataset name for which we need to check the errors.</p>
+<h3>Example</h3>
+<p>Following example shows how to check and fix errors in VSAM dataset &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN DD  *
+   VERIFY DS(MY.VSAM.KSDSFILE)                                  
+/*
+</pre>  
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will fix the errors in VSAM dataset.</p>
+<h1>VSAM - Alternate Index</h1>
+<p>Alternate index are the additional index that are created for KSDS/ESDS datasets in addition to their primary index. An alternate index provides access to records by using more than one key. The key of alternate index can be a non-unique key, it can have duplicates.</p>
+<h2>Creation of Alternate Index</h2>
+<p>Following steps are used to create an Alternate Index &minus;</p>
+<ul class="list">
+<li>Define Alternate Index</li>
+<li>Define Path</li>
+<li>Building Index</li>
+</ul>
+<h2>Define Alternate Index</h2>
+<p>Alternate Index is defined using <b>DEFINE AIX</b> command.</p>
+<pre class="result notranslate">
+DEFINE AIX                              -
+(NAME(alternate-index-name)             -
+RELATE(vsam-file-name)                  -
+CISZ(number)                            -
+FREESPACE(CI-Percentage,CA-Percentage)  -
+KEYS(length offset)                     -
+NONUNIQUEKEY / UNIQUEKEY                -
+UPGRADE / NOUPGRADE                     -
+RECORDSIZE(average maximum))            -
+DATA                                    -
+   (NAME(vsam-file-name.data))          -
+INDEX                                   -
+   (NAME(vsam-file-name.index))
+</pre>
+<p>Above syntax shows the parameters which are used while defining Alternate Index. We have already discussed some parameters in Define Cluster Module and some of the new parameters are used in defining Alternate Index which we will discuss here &minus;</p>
+<table class="table table-bordered">
+<tr><th>Sr.No</th>
+<th style="text-align:center;">Parameters with Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">1</td>
+<td><p><b>DEFINE AIX</b></p>
+<p>Define AIX command is used to define Alternate Index and specify parameter attributes for its components.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td><p><b>NAME</b></p>
+<p>NAME specifies the name of Alternate Index.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td><p><b>RELATE</b></p>
+<p>RELATE specifies the name of the VSAM cluster for which the alternate index is created.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td><p><b>NONUNIQUEKEY / UNIQUEKEY</b></p>
+<p>UNIQUEKEY specifies that the alternate index is unique and NONUNIQUEKEY specifies that duplicates may exist.</p></td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td><p><b>UPGRADE / NOUPGRADE</b></p>
+<p>UPGRADE specifies that the alternate index should be modified if the base cluster is modified and NOUPGRADE specifies that the alternate indexes should be left alone if the base cluster is modified.</p></td>
+</tr>
+</table>
+<h3>Example</h3>
+<p>Following is a basic example to show how to define an Alternate Index in JCL &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   DEFINE AIX (NAME(MY.VSAM.KSDSAIX)      -
+   RELATE(MY.VSAM.KSDSFILE)               -
+   CISZ(4096)                             -
+   FREESPACE(20,20)                       -
+   KEYS(20,7)                             -
+   NONUNIQUEKEY                           -
+   UPGRADE                                -
+   RECORDSIZE(80,80))                     -
+   DATA(NAME(MY.VSAM.KSDSAIX.DATA))       -
+   INDEX(NAME(MY.VSAM.KSDSAIX.INDEX))
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create MY.VSAM.KSDSAIX Alternate Index.</p>
+<h2>Define Path</h2>
+<p>Define Path is used to relate the alternate index to the base cluster. While defining path we specify the name of the path and the alternate index to which this path is related.</p>
+<pre class="result notranslate">
+DEFINE PATH                        -
+NAME(alternate-index-path-name)    -
+PATHENTRY(alternate-index-name))
+</pre>
+<p>Above syntax has two parameters. NAME is used to specify the Alternate Index Path Name and PATHENTRY is used to specify Alternate Index Name.</p>
+<h3>Example</h3>
+<p>Following is a basic example to define Path in JCL &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+DEFINE PATH                          -
+   NAME(MY.VSAM.KSDSAIX.PATH)    -
+   PATHENTRY(MY.VSAM.KSDSAIX))
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will create path between Alternate Index to the base cluster.</p>
+<h2>Building Index</h2>
+<p>BLDINDEX command is used to build the alternate index. BLDINDEX reads all the records in the VSAM indexed data set (or base cluster) and extracts the data needed to build the alternate index.</p>
+<pre class="result notranslate">
+BLDINDEX                           -
+INDATASET(vsam-cluster-name)       -
+OUTDATASET(alternate-index-name))
+</pre>
+<p>Above syntax has two parameters. INDATASET is used to specify the VSAM Cluster Name and OUTDATASET is used to specify Alternate Index Name.</p>
+<h3>Example</h3>
+<p>Following is a basic example to Build Index in JCL &minus;</p>
+<pre class="prettyprint notranslate">
+//SAMPLE JOB(TESTJCL,XXXXXX),CLASS = A,MSGCLASS = C
+//STEP1  EXEC PGM = IDCAMS
+//SYSPRINT DD  SYSOUT = *
+//SYSIN    DD  *
+   BLDINDEX                           -
+   INDATASET(MY.VSAM.KSDSFILE)        -
+   OUTDATASET(MY.VSAM.KSDSAIX))
+/*
+</pre>
+<p>If you will execute the above JCL on Mainframes server. It should execute with MAXCC = 0 and it will build the index.</p>
+<h1>VSAM - Catalog</h1>
+<p>Catalog maintains the unit and volume where dataset resides. Catalog is used for retrieval of datasets. Non-VSAM datasets create a catalog entry by means of Disposition Parameter in JCL. VSAM datasets maintains its own catalog in form of KSDS cluster. In following image you can see the type of VSAM catalogs &minus;</p>
+<img src="/vsam/images/catalog.png" alt="Catalog" />
+<h2>Master Catalog</h2>
+<p>Master catalog is itself a file which monitors and manages operations of VSAM. Their is only one master catalog in any system which contains entries about system datasets and VSAM datasets. VSAM and Non-VSAM datasets may have entry in master catalog but this is not a good practice. The master catalog is created during system generation process and resides on system volume. Master catalog owns all VSAM resources in operating system. All files used in VSAM are controlled by master catalog. Master catalog is responsible for following operations &minus;</p>
+<ul class="list">
+<li>Password Authorization for files</li>
+<li>Enhancing the Security</li>
+<li>VSAM access for files</li>
+<li>Space Management of file</li>
+<li>Location of file</li>
+<li>Free Space available in file</li>
+</ul>
+<p>When any of the above file attributes changes they are automatically updated in master catalog. Master catalog is defined using IDCAMS programs.</p>
+<h2>User Catalog</h2>
+<p>User catalog has same structure and concepts as the master catalog. It is present at next hierarchy level after master catalog. User catalog is not mandatory in the system but it is used to enhance security of VSAM system. Master catalog points to VSAM files but if User catalog is present then master catalog points to user catalog. User catalogs can be many in number as per the system requirement. In VSAM structure if master catalog is removed then it will not affect the user catalog. User catalog contain entries about application specific datasets. The information of user catalog is stored in master catalog.</p>
+<h2>Data Space</h2>
+<p>Data space is an area of the direct access storage device that is exclusively allocated for VSAM use. Data space must be created before creating VSAM clusters. The area occupied by the data space is recorded in the Volume Table of Contents (VTOC), so that the space will not be available for allocation to any other use, either VSAM or non-VSAM. VTOC has entry of area occupied by space. VSAM creates a data space to hold the user catalog entries. VSAM takes control of this space and monitors and maintains this space as needed by VSAM files.</p>
+<h2>Unique Clusters</h2>
+<p>Unique Clusters consists of a separate data space which is utilized completely by the cluster created within it. Unique clusters are created out of unallocated space on direct access storage.</p>
+<h2>Sub-allocated Clusters</h2>
+<p>A sub-allocated VSAM file shares the VSAM space with other sub-allocated files. It specifies that file should be sub-allocated within existing VSAM space. Sub-allocation is used for easier management and control of VSAM spaces.</p>
+<h2>Non-VSAM datasets</h2>
+<p>Non-VSAM datasets resides on both tape and direct access storage. Non-VSAM datasets may have entries in both master catalog and user catalogs. The main function of cataloging non-VSAM datasets is to retain unit and volume serial information. </p>
+<h1>VSAM - File Status</h1>
+<p>While working with VSAM datasets you may encounter abends. Following are the common file status codes with their description which will help you to resolve the issues &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th>Code</th>
+<th style="text-align:center;">Description</th>
+</tr>
+<tr>
+<td style="text-align:center;">00</td>
+<td>Operation completed successfully</td>
+</tr>
+<tr>
+<td style="text-align:center;">02</td>
+<td>Non-Unique Alternate Index duplicate key found</td>
+</tr> 
+<tr>
+<td style="text-align:center;">04</td>
+<td>Invalid fixed length record</td>
+</tr>
+<tr>
+<td style="text-align:center;">05</td>
+<td>While performing OPEN File and file is not present</td>
+</tr>
+<tr>
+<td style="text-align:center;">10</td>
+<td>End of File encountered</td>
+</tr>
+<tr>
+<td style="text-align:center;">14</td>
+<td>Attempted to READ a relative record outside file boundary</td>
+</tr>
+<tr>
+<td style="text-align:center;">20</td>
+<td>Invalid Key for VSAM KSDS or RRDS</td>
+</tr>
+<tr>
+<td style="text-align:center;">21</td>
+<td>Sequence error while performing WRITE or changing key on REWRITE</td>
+</tr>
+<tr>
+<td style="text-align:center;">22</td>
+<td>Primary duplicate Key found</td>
+</tr>
+<tr>
+<td style="text-align:center;">23</td>
+<td>Record not found or File not found</td>
+</tr>
+<tr>
+<td style="text-align:center;">24</td>
+<td>Key outside boundary of file</td>
+</tr>
+<tr>
+<td style="text-align:center;">30</td>
+<td>Permanent I/O Error</td>
+</tr>
+<tr>
+<td style="text-align:center;">34</td>
+<td>Record outside file boundary</td>
+</tr>
+<tr>
+<td style="text-align:center;">35</td>
+<td>While performing OPEN File and file is not present</td>
+</tr>
+<tr>
+<td style="text-align:center;">37</td>
+<td>OPEN file with wrong mode</td>
+</tr>
+<tr>
+<td style="text-align:center;">38</td>
+<td>Tried to OPEN a Locked file</td>
+</tr>
+<tr>
+<td style="text-align:center;">39</td>
+<td>OPEN failed because of conflicting file attributes</td>
+</tr>
+<tr>
+<td style="text-align:center;">41</td>
+<td>Tried to OPEN a file that is already open</td>
+</tr>
+<tr>
+<td style="text-align:center;">42</td>
+<td>Tried to CLOSE a file that is not OPEN</td>
+</tr>
+<tr>
+<td style="text-align:center;">43</td>
+<td>Tried to REWRITE without READing a record first</td>
+</tr>
+<tr>
+<td style="text-align:center;">44</td>
+<td>Tried to REWRITE a record of a different length</td>
+</tr>
+<tr>
+<td style="text-align:center;">46</td>
+<td>Tried to READ beyond End-of-file</td>
+</tr>
+<tr>
+<td style="text-align:center;">47</td>
+<td>Tried to READ from a file that was not opened I-O or INPUT</td>
+</tr>
+<tr>
+<td style="text-align:center;">48</td>
+<td>Tried to WRITE to a file that was not opened I-O or OUTPUT</td>
+</tr>
+<tr>
+<td style="text-align:center;">49</td>
+<td>Tried to DELETE or REWRITE to a file that was not opened I-O</td>
+</tr>
+<tr>
+<td style="text-align:center;">91</td>
+<td>Password or authorization failed</td>
+</tr>
+<tr>
+<td style="text-align:center;">92</td>
+<td>Logic Error</td>
+</tr>
+<tr>
+<td style="text-align:center;">93</td>
+<td>Resources are not available</td>
+</tr>
+<tr>
+<td style="text-align:center;">94</td>
+<td>Sequential record unavailable or concurrent OPEN error</td>
+</tr>
+<tr>
+<td style="text-align:center;">95</td>
+<td>File Information invalid or incomplete</td>
+</tr>
+<tr>
+<td style="text-align:center;">96</td>
+<td>No DD statement for the file</td>
+</tr>
+<tr>
+<td style="text-align:center;">97</td>
+<td>OPEN successful and file integrity verified</td>
+</tr>
+<tr>
+<td style="text-align:center;">98</td>
+<td>File is Locked - OPEN failed</td>
+</tr>
+<tr>
+<td style="text-align:center;">99</td>
+<td>Record Locked - Record access failed</td>
+</tr>
+</table>
+<div class="mui-container-fluid button-borders show" id="bottom_navigation">
+<div class="pre-btn">
+<a href="/vsam/vsam_interview_questions.htm"><i class="fal fa-chevron-circle-left"></i> Previous Page</a>
+<a class="hide-on-mobile" href="javascript:printPage();"><i class="fa fa-print"></i> Print Page</a>
+</div>
+<div class="nxt-btn">
+<a href="/vsam/vsam_useful_resources.htm">Next Page <i class="fal fa-chevron-circle-right"></i>&nbsp;</a>
+</div>
+</div>
+<div class="space-bottom" style="margin-bottom:20px;"></div>
+<div class="google-bottom-ads" id="google-bottom-ads">
+<div>Advertisements</div>
+<div>
+<div id="adp_bottom_ads"></div>
+<script>
+var adPos = document.getElementById('adp_bottom_ads');
+var mobile_ad_id = "a8a632a6-046e-4f5c-b25f-8bc82ac89fb2";
+var desktop_ad_id = "e7ddd6f7-1ab0-494a-bade-887daa4373a0";
+var adpushup = adpushup || {};
+adpushup.que = adpushup.que || [];
+adpushup.que.push(function() {
+var ad_id = window.innerWidth <= 768 ? mobile_ad_id : desktop_ad_id;
+adPos.innerHTML = '<div id="' + ad_id + '" class="_ap_apex_ad"></div>';
+adpushup.triggerAd(ad_id);
+});
+</script>
+</div>
+<div class="space-bottom"></div>
+</div>
+</div>
+<!-- Tutorial Content Ends Here -->
+<!-- Right Column Starts Here -->
+<div class="mui-col-md-2 google-right-ads" id="chapter-menu" style="display: none;">
+<input type="hidden" id="vu" name="vu" value=""/>
+<div class="space-top"></div>
+<div class="mui-panel">
+<ul class="paid-menu" id="div-right-menu">
+<li><a class="hide-on-mobile" href="javascript:printPage();" title="Print this page"><i class="fa fa-print"></i> Print</a></li>
+<li><a href="javascript:void(0)" class="add_notes" title="Add Custom Notes" onclick="add_notes();"><i class="fa fa-edit"></i>&nbsp;Add Notes</a></li>
+<li><a href="javascript:void(0)" class="clsPage text-bookmark" id="text-bookmark" title="Add Bookmark" onclick="text_bookmark()"><i class="fal fa-bookmark"></i>&nbsp;Bookmark this page </a></li>
+<li><a href="javascript:void(0);" id="report_error_popup" onclick="report_error_popup();" title="Report Error"><i class="fal fa-bell"></i>&nbsp;Report Error</a></li>
+<li><a href="javascript:void(0);" id="suggestion_popup" title="Give Suggestions" onclick="suggestion_popup();"><i class="fal fa-badge-check"></i>&nbsp;Suggestions</a></li>
+</ul>
+<div class="profile-my-notes" id="text_notes_div" style="display:none;">
+<textarea rows="10" class="text_notes" id="text_notes" name="text_notes" placeholder="Enter your custom notes..."></textarea>
+<br>
+<a href="javascript:void(0);" id="submit_text_notes" class="butn-save" onclick="submit_text_notes();"> Save</a>
+<a href="javascript:void(0);" class="pop-no butn-cancel" onclick="notesClose();"> Close</a>
+<p class="notes_msg"  ></p>
+</div>
+<div class="bottom-menu">
+<button class="tp-btn"><i class="fal fa-box-up"></i> <a href="/videotutorials/dashboard.php">Dashboard</a></button>
+<button class="tp-btn"><i class="fal fa-sign-out-alt"></i> <a href="/videotutorials/userlogout.php">Logout</a></button>
+</div>
+</div>
+</div>
+<div class="mui-col-md-2 google-right-ads" id="google-right-ads">
+<div class="space-top"></div>
+<div class="google-right-ad" style="margin: 0px auto !important;margin-top:5px;min-height:250px!important">
+<div id="f0f6cff6-393d-4170-b63a-d9ff06ca9f25" class="_ap_apex_ad">
+<script>
+var adpushup = adpushup || {};
+adpushup.que = adpushup.que || [];
+adpushup.que.push(function() {
+adpushup.triggerAd("f0f6cff6-393d-4170-b63a-d9ff06ca9f25");
+});
+</script>
+</div>
+</div>
+<div class="google-right-ad" style="margin-top:16px;min-height:250px!important">
+<div id="5c0affd5-724a-475c-bfcd-cecbc7660c36" class="_ap_apex_ad">
+<script>
+var adpushup = adpushup || {};
+adpushup.que = adpushup.que || [];
+adpushup.que.push(function() {
+adpushup.triggerAd("5c0affd5-724a-475c-bfcd-cecbc7660c36");
+});
+</script>
+</div>
+</div>
+<div class="google-right-ad" style="margin-top:16px;margin-bottom:15px;min-height:600px!important">
+<div id="8f8814c2-d64c-4d26-9cb9-543653c0b48f" class="_ap_apex_ad">
+<script>
+var adpushup = adpushup || {};
+adpushup.que = adpushup.que || [];
+adpushup.que.push(function() {
+adpushup.triggerAd("8f8814c2-d64c-4d26-9cb9-543653c0b48f");
+});
+</script>
+</div>
+</div>
+<div class="space-bottom" style="margin-bottom:15px;"></div>
+</div>
+<!-- Right Column Ends Here -->
+</div>
+</div>
+<div class="clear"></div>
+<footer id="footer">
+<div class="mui--text-center">
+<div class="mui--text-caption mui--text-light">
+<a href="/index.htm" class="logo"><img class="img-responsive" src="/images/logo-black.png" alt="Tutorials Point" title="Tutorials Point"></a>
+</div>
+<ul class="mui-list--inline mui--text-body2 mui--text-light">
+<li><a href="/about/index.htm"><i class="fal fa-globe"></i> About us</a></li>
+<li><a href="/about/return_refund_policy.htm"> <i class="fal fa-asterisk"></i> Refund Policy</a></li>
+<li><a href="/about/about_terms_of_use.htm"><i class="fal fa-asterisk"></i> Terms of use</a></li>
+<li><a href="/about/about_privacy.htm"> <i class="fal fa-shield-check"></i> Privacy Policy</a></li>
+<li><a href="/about/faq.htm"><i class="fal fa-question-circle"></i> FAQ's</a></li>
+<li><a href="/about/contact_us.htm"><i class="fal fa-map-marker-alt"></i> Contact</a></li>
+</ul>
+<div class="mui--text-caption mui--text-light bottom-copyright-text">&copy; Copyright 2021. All Rights Reserved.</div>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-232293-6"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-232293-6');
+</script>
+<script src="https://www.tutorialspoint.com/videotutorials/js/text_menu.js?v=1"></script>
+<script>
+$(document).ready(function (){
+    var cval = readCookie('subscription_purchased');
+    if(cval == '1'){
+          // logged in and purchased subscription.
+          $('#google-right-ads').remove();
+          $('#adp1').remove();
+          $('#adp2').remove();
+          $('#stickyparent').remove();
+          $('#google-top-ads').remove();
+          $('#adp_top_ads').remove();
+          $('#google-bottom-ads').remove();
+          $('.tutorial-content hr').remove();
+          $('.login').remove();
+          $('#chapter-menu').show();
+          $('.content h1').css("border-bottom", "none");
+          $('.google-right-ads').css("padding-right", "0px");
+          $('.tutorial-content').css("border-radius", "10px");
+          $('#chapter-menu .mui-panel').css("border-radius", "10px");
+     }
+});
+</script>
+</footer>
+</body>
+</html>
