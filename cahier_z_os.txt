@@ -1,4 +1,4 @@
-- Pour revenir : f3
+- Pour revenir : F3
 - touche ctrl: entrer
 - touche entrer: manipuler le curseur
 - ***: ici il faut seulement traper ctrl sinon il va ignorer
@@ -42,6 +42,9 @@ NB: LISTDS command can be used to list data set information
 - KEYS: montre les configs actuelles de PFSHOW
 - ISPFORM: ramène vers le menu principal de ISPF 
 - DDLIST: Liste tous les DDNAME (Data Definition Name. DD c'est le mécanisme de création de lien entre un process et Data set sur le disque)
+- S devant 1 DS: Sélectionner le DS
+- V devant 1 DS: Voir le DS, vous pouvez le modifier mais les modifs ne pourront jamais etre Enregistrées.
+- B devant 1 DS: Voir le DS sans pouvoir le modifier
 - E devant 1 PDS: Entrer dans le PDS
 	- I: insérer une ligne (i9 insere 9 lignes)
 	- D: supprimer une ligne (d11 supprime 11 lignes)
@@ -57,8 +60,8 @@ NB: LISTDS command can be used to list data set information
 	- SAVE: Enregistre les modifications
 	- CAN(CANCEL): Sortir sans enrgistrer les modifications.
 	- numéro de ligne + F8: aller à la ligne
-	- m F8: Vas jusqu'à la dernière ligne du code
-	- m F7: Vas à la toute 1ère ligne du code
+	- M + F8: Vas jusqu'à la dernière ligne du code
+	- M + F7: Vas à la toute 1ère ligne du code
 	- F DUMP (trouve la chaine DUMP)
 	- F DUMP ALL (trouve toutes les occurrences de la chaine DUMP)
 	- C DUMP LOLO: (change une occurrence de DUMP en LOLO)
@@ -69,6 +72,7 @@ NB: LISTDS command can be used to list data set information
 - S MBRE2;COPY MBRE1: Création du mbre MBRE2 en dupliquant le mbre MBRE1 ou faire S MBRE2, entrer dans le JCL et faire COPY MBRE1.
 - F MEMBRE: Trouve un mbre.
 - L mbre*: liste tous les objets commencant par mbre.
+- L 100: Se rendre à la ligne 100.
 - START: Crée un nouvel écran ISPF (Screen 2,..,32 --- On peut aller jusqu'à 32 écrans) 
 - SWAP: basculer entre les écrans créés ou F9.
 - SWAP LIST: Montre un panneau où l'on peut tous les écrans.
@@ -153,7 +157,12 @@ NB: - Toutes les options de recherche de la commande 'F(FIND)' sont aussi valabl
 
 NB: - Concernant les tabbing, les hyphens(-) st ignorés dans le hardware et le logical tabbing. 
 	- Concernant les tabbing, les asterisks(*) st ignorés dans le software tabbing.
-	- Les hyphens(-) ou les underscore(_) sont use ds la software tabbing pour représenter les champs (colonne)   
+	- Les hyphens(-) ou les underscore(_) sont use ds la software tabbing pour représenter les champs (colonne)  
+
+- BOUNDS(BNDS, BOU, BOUND, BND) n m: Délimite la zone de travail des cmdes FIND et CHANGE de la colonne 'n' à la colonne 'm'. Ex: BOUNDS 36 72. Les symboles "<" et ">" marquent cette limite.
+- MASK: Permet d'insérer une ligne modèle (Cette cmde s'utilise sur les lignes).
+
+NB: - BOUNDS a aussi un effet sur les cmdes EXCLUDE, SORT 
 
 
 *********************************************************************************************************************************
